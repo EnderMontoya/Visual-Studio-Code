@@ -21,10 +21,11 @@ def alarma_telefonica(sensor: SensorTemperatura) -> None:
     """Callback 3: llama a bomberos."""
     print(f"📱 [llamada]: ¡llamando a bomberos por culpa de este sensor {sensor.identificador}!")    
 
-# --- 2,5. sistema de luses que se activan si un sensor no se activa ---
+# --- 2,5. sistema que muestra cuando un sensor no se activa lo que yo interpreto como que es lo que pidio de tarea😁
 def evaluar_sensor_no_activo(sensor: SensorTemperatura, umbral: float, manejadores: list[Callable[[SensorTemperatura], None]]) -> None:
+    """evalua los sensores para ver cual no exede el umbral"""
     if sensor.lectura < umbral:
-        print(f"\n⚠️ [UMBRAL NO EXCEDIDO en {sensor.identificador}]:")
+        print(f"\n😁[UMBRAL NO EXCEDIDO TODO EN ORDEN en {sensor.identificador}]:")
         for callback in manejadores:
             callback(sensor) 
 
@@ -54,7 +55,8 @@ if __name__ == "__main__":
 
     # Evaluación usando callbacks
     for s in planta_principal:
-        if s.lectura > 80.0:
+        if s.lectura > 80.0: # agrege este if para poder separar los casos, osea poder poner as esto si, de lo contrario as esto otro
             evaluar_sensor(s, umbral=80.0, manejadores=protocolo_emergencia)
         else:
             evaluar_sensor_no_activo(s, umbral=80.0, manejadores=[])
+    # else ase que si no se cumple el caso de mayor que el umbral 80, entonses activa a evaluar sensor no activo        
