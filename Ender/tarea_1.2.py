@@ -1,9 +1,9 @@
-import copy
+
 from typing import Callable
 
 # --- 1. Definición del Objeto Sensor ---
 class SensorTemperatura:
-    """Representa un sensor de temperatura industrial."""
+    """Representa un simport copyensor de temperatura industrial."""
     def __init__(self, identificador: str, lectura: float):
         self.identificador: str = identificador
         self.lectura: float = lectura
@@ -19,7 +19,15 @@ def alarma_sonora(sensor: SensorTemperatura) -> None:
 
 def alarma_telefonica(sensor: SensorTemperatura) -> None:
     """Callback 3: llama a bomberos."""
-    print(f"📱 [llamada]: ¡llamando a bomberos por culpa de este sensor{sensor.identificador}!")    
+    print(f"📱 [llamada]: ¡llamando a bomberos por culpa de este sensor {sensor.identificador}!")    
+
+# --- 2,5. sistema de luses que se activan si un sensor no se activa ---
+def evaluar_sensor_no_activo(sensor: SensorTemperatura, umbral: float, manejadores: list[Callable[[SensorTemperatura], None]]) -> None:
+    """Evalúa un sensor y ejecuta la lista de funciones callbacks si excede el umbral."""
+    if sensor.lectura < umbral:
+        print(f"\n⚠️ [UMBRAL NO EXCEDIDO en {sensor.identificador}]:")
+        for callback in manejadores:
+            callback(sensor) 
 
 # --- 3. Función que recibe Apuntadores a Funciones (Callbacks) ---
 def evaluar_sensor(sensor: SensorTemperatura, umbral: float, manejadores: list[Callable[[SensorTemperatura], None]]) -> None:
@@ -27,7 +35,7 @@ def evaluar_sensor(sensor: SensorTemperatura, umbral: float, manejadores: list[C
     if sensor.lectura > umbral:
         print(f"\n⚠️ [UMBRAL EXCEDIDO en {sensor.identificador}]:")
         for callback in manejadores:
-            callback(sensor)  # Invocación de la función por referencia
+            callback(sensor)  # Invocación de la función por referencia           
 
 # --- Execution Block ---
 if __name__ == "__main__":
