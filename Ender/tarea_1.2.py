@@ -11,11 +11,15 @@ class SensorTemperatura:
 # --- 2. Apuntadores a Funciones (Manejadores de Eventos / Callbacks) ---
 def alarma_luces(sensor: SensorTemperatura) -> None:
     """Callback 1: Enciende luces de advertencia."""
-    print(f"🚨 [LUCES]: ¡Alerta en {sensor.identificador}! Valor: {sensor.lectura}°C")
+    print(f"🚨 [LUCES]:   ¡Alerta en {sensor.identificador}! Valor: {sensor.lectura}°C")
 
 def alarma_sonora(sensor: SensorTemperatura) -> None:
     """Callback 2: Activa la sirena de emergencia."""
-    print(f"🔊 [SIRENA]: ¡Sonando alarma por {sensor.identificador}!")
+    print(f"🔊 [SIRENA]:  ¡Sonando alarma por {sensor.identificador}!")
+
+def alarma_telefonica(sensor: SensorTemperatura) -> None:
+    """Callback 3: llama a bomberos."""
+    print(f"📱 [llamada]: ¡llamando a bomberos por culpa de este sensor{sensor.identificador}!")    
 
 # --- 3. Función que recibe Apuntadores a Funciones (Callbacks) ---
 def evaluar_sensor(sensor: SensorTemperatura, umbral: float, manejadores: list[Callable[[SensorTemperatura], None]]) -> None:
@@ -29,12 +33,13 @@ def evaluar_sensor(sensor: SensorTemperatura, umbral: float, manejadores: list[C
 if __name__ == "__main__":
     s1 = SensorTemperatura("SENSOR_01", 85.5)
     s2 = SensorTemperatura("SENSOR_02", 42.0)
+    s3 = SensorTemperatura("SENSOR_03", 93.2)
 
     # Arreglo de Referencias a Objetos
-    planta_principal = [s1, s2]
+    planta_principal = [s1, s2, s3]
 
     # Arreglo de Apuntadores a Funciones (Callbacks)
-    protocolo_emergencia = [alarma_luces, alarma_sonora]
+    protocolo_emergencia = [alarma_luces, alarma_sonora, alarma_telefonica]
 
     # Demostración de Copia Profunda vs Superficial
     planta_respaldo = copy.deepcopy(planta_principal)
