@@ -1,0 +1,13 @@
+robot: es una maquina electromecanica programable capas de realizar siertas acciones de forma automatica o semiautomatica 
+
+maquina: es un aparato mecanico
+
+circuito: es la conpocicion o conjunto de conponentes electronios
+
+electronica: es el area que conprende los conponentes como resistencias condensadores diodos transistores potenciometros,entre otros
+
+para el examen:
+
+10preguntas teoricas en el salon de abajo de 7 a 9
+segundo practica de lavoratorio, como lo de el sensor de tenperatura, la tarea enviada al github 5 puntos
+investigar utf-8 para que sirve, un punto de mas en el examne 
